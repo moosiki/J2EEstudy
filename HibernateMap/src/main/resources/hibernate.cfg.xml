@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">131517</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/E_shop</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.search.autoregister_listeners">false</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        
+        <!-- hibernate 第二部分【hibernate 参数控制】  -->
+	 	<property name="hibernate.dialect">com.common.MySQL5InnoDBUTF8Dialect</property>
+		<!--sql 正对的是mysql数据库  -->
+	  	<property name="hibernate.show_sql">true</property><!--显示SQL语句 -->
+	 	<property name="hibernate.format_sql">true</property><!--格式化sql  -->
+	 	<property name="hbm2ddl.auto">update</property><!-- ddl控制 --> 
+	 	
+	 	<!--表的映射  -->
+	 	<mapping class="com.model.User"></mapping>
+	 	<mapping class="com.model.Order"></mapping>
+	 	<mapping class="com.model.Goods"></mapping>
+    </session-factory>
+</hibernate-configuration>

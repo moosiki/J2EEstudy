@@ -1,0 +1,97 @@
+  @CHARSET "UTF-8";
+  #main {
+        background-size: cover;
+        background-image: url("/HibernateMap/images/bg4.jpg");
+    }
+    #title{
+    		width:250px;
+   	 		margin: 0 auto;
+   	 		text-align: center;
+			font-family: "Arial", sans-serif;
+       		font-size: 35px;
+        	font-weight: bold;
+    		color: #C40C0C;
+    		text-shadow: 
+    	  	0 -1px 0 #858585,    
+               
+               0 1px 10px rgba(0,0,0,.6),
+               0 6px 1px rgba(0,0,0,.1),
+               0 0 5px rgba(0,0,0,.2),
+               0 1px 3px rgba(0,0,0,.3),
+               0 3px 5px rgba(0,0,0,.2),
+               0 7px 10px rgba(0,0,0,.25),
+               0 15px 10px rgba(0,0,0,.2),
+               0 25px 15px rgba(0,0,0,.15);
+               background: -webkit-gradient(linear,left top,left bottom,from(rgba(28,28, 28,0.8)),to(rgba(155,155,155,0.5)));
+   	 	}
+    #outline {
+        margin: 0 auto;
+        width: 900px;
+        height: 600px;
+        background-color: rgba(245, 222, 179, 0.3);
+        border: 1px #169D99 solid;
+        border-radius: 10px;
+    }
+
+    header {
+        height: 100px;
+        width: 200px;
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        margin: 0px 0px 0px -100px;
+    }
+    footer {
+        margin: 35px 100px 0 0px;
+    }
+
+    .button {
+        margin-left: 50px;
+        size: 20px;
+        
+        /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        background-size: contain;
+        /*text-decoration: none;*/
+        display: inline-block;
+        font-size: 16px;
+        background-color: green;
+    }
+
+    /* h2 {
+		width:250p;
+        font-family: "晨光大字";
+        font-size: 1.8em;
+        position: absolute;
+        top: 15%;
+        left: 45%;
+        float: right;
+        margin: 0 auto;
+        width: 150px;
+    } */
+
+    .correctTip {
+        color: green;
+        font-size: 0.7em;
+    }
+
+    .wrongTip{
+        color: red;
+        font-size: 0.7em;
+    }
+
+    #form {
+        margin: 200px 100px 0 200px;
+        width: 520px;
+    }
+
+    .inputBox {
+        text-shadow: 1px 1px 0px gold;
+        color: MidnightBlue;
+        width: 270px;
+        border: 2px groove #8EE5EE;
+        border-radius: 4px;
+    }
