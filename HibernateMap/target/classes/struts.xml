@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+		<!-- 常量 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"/><!-- 动态方法 -->
+	<constant name="struts.devMode" value="true"></constant><!-- 开发者模式 -->
+	
+	<package name="default" namespace="/" extends="json-default">
+		
+		<action name="registe" class="com.action.ShopActionImpl" method="registe">
+			<result name="success">pages/Detail.jsp</result>
+		</action>
+		
+		<action name="login" class="com.action.ShopActionImpl" method="login">
+			
+			<result name="success">pages/LoginSuccess.jsp</result>
+			<result name="false">pages/Login.jsp</result>
+			
+		</action>
+		
+		<action name="shopping" class="com.action.ShopActionImpl" method="shopping">
+			<result name="success">pages/shopping.jsp</result>
+		</action>
+		<action name="creatOrder" class="com.action.ShopActionImpl" method="creatOrder">
+			<result name="success">pages/shopping.jsp</result>
+		</action>
+		
+		<action name="checkOrder" class="com.action.ShopActionImpl" method="checkOrder">
+			<result name="success">pages/Order.jsp</result>
+		</action>
+		
+		<action name="deleteOrder" class="com.action.ShopActionImpl" method="deleteOrder">
+			<result name="success">pages/Order.jsp</result>
+		</action>
+		
+	</package>
+</struts>
