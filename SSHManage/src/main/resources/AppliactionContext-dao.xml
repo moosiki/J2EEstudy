@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd 
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx.xsd 
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop.xsd 
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd ">
+
+	<!--数据源  -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="url" value="jdbc:mysql://localhost:3306/employees?characterEncoding=UTF-8"/>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="username" value="root"/>
+		<property name="password" value="131517"/>
+	</bean>
+	
+	<!--sessionfactory  -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<!--hibernate连接信息  -->
+		<property name="dataSource" ref="dataSource"/>
+		<!--hibernate映射信息  -->
+		<property name="packagesToScan">
+			<list>
+				<value>com.model</value>
+			</list>
+		</property>                                                          
+		<!--运行参数  -->
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=com.common.MySQL5InnoDBUTF8Dialect
+				hibernate.show_sql=true
+				hibernate.format_sql=true
+				hibernate.hbm2ddl.auto=update
+			</value>
+		</property>
+	</bean>
+	
+	<!--事物配置  -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!--aop配置  -->
+	<aop:config>
+		<aop:pointcut expression="execution(public * com.service.impl.*.*(..))" id="interceptorPointCuts"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts"/>
+	</aop:config>
+  
+    <!--扫描dao-->
+    <context:component-scan base-package="com.dao"/>
+
+</beans>

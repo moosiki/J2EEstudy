@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+		<!-- 常量 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"/><!-- 动态方法 -->
+	<constant name="struts.devMode" value="true"></constant><!-- 开发者模式 -->
+	
+	<package name="default" namespace="/" extends="json-default">
+
+		<action name="studentAction!*" class="studentAction" method="{1}">
+			<result name="to_save">/pages/addOrEdit.jsp</result>
+			<result name="do_save">/pages/addOrEdit.jsp</result>
+			<result name="list">/pages/employeeMessage.jsp</result>
+			<result name="do_delete" type="redirectAction">studentAction!list</result>
+            <result name="to_edit">/pages/student/edit.jsp</result>
+		</action>
+		
+		<action name="teacherAction!*" class="teacherAction" method="{1}">
+			<result name="do_save">/pages/addOrEdit.jsp</result>
+			 <result name="list">/pages/employeeMessage.jsp</result>
+			 <result name="do_delete" type="redirectAction">teacherAction!list</result>
+            <result name="to_edit">/pages/student/edit.jsp</result>
+		</action>
+	</package>
+</struts>

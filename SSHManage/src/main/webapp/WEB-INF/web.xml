@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>SSHManage</display-name>
+	<welcome-file-list>
+		<welcome-file>/pages/index.html</welcome-file>
+		<welcome-file>/WEB-INF/pages/index.html</welcome-file>
+		<welcome-file>/WEB-INF/pages/index.jsp</welcome-file>
+		<welcome-file>/WEB-INF/pages/default.html</welcome-file>
+		<welcome-file>/WEB-INF/pages/default.htm</welcome-file>
+		<welcome-file>/WEB-INF/pages/default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!--引入Spring ApplicationContext -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:AppliactionContext-*.xml</param-value>
+	</context-param>
+
+	<!--编码转换 Filter -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 使用spring解决懒加载问题 -->  
+    <filter>  
+        <filter-name>OpenSessionInViewFilter</filter-name>  
+        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>OpenSessionInViewFilter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>  
+
+
+	<!-- Spring MVC Servlet -->
+	<servlet>
+		<servlet-name>SpringMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath*:Spring-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SpringMVC</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Session 超时设置（15分钟） -->
+	<session-config>
+		<session-timeout>15</session-timeout>
+	</session-config>
+	
+	<!-- Spring Security 认证控制Filter -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	
+ 	<!-- 项目默认首页设置 -->
+	<welcome-file-list>
+		<welcome-file>/WEB-INF/pages/start/loginPage.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- 异常出错页面设置 -->
+	<!-- <error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/WEB-INF/pages/error/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/pages/error/500.jsp</location>
+	</error-page> -->
+	<!-- <error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/pages/error/404.jsp</location>
+	</error-page> -->
+
+</web-app>

@@ -1,0 +1,59 @@
+@CHARSET "UTF-8";
+*{ margin:0; padding:0; list-style:none;}
+#headPage{
+	margin: 0;
+	/* position: fixed; */
+	top: 0;
+	color: #E3FAF7;
+	font-size: 20px;
+	width: 100%;
+	height: 65px;
+	background: #2396F2;
+}
+#menuPage{
+	position: fixed;
+	width: 160px;
+	height: 100%;
+	background: #BEBFC1;
+}
+#messagePage{
+	height: 100%;
+	margin-left: 160px;
+}
+#myChart{
+	width: 200px;
+	height: 200px;
+}
+.menuDiv{
+	color: #370936;
+	height: 50px;
+	border-bottom: 1px solid #2C2A2A;
+	width: 100%;
+	background: rgba(23,66,34,0.6);
+	text-align: center;
+	line-height: 50px;
+}
+.menuDiv:hover{
+	color: #E1D4D4;
+	background: #7C3801;
+}
+.menuDivBeChoised{
+	font-weight: bold;
+	color: #1C0000;
+	background:white;
+}
+/*按钮样式  */
+.button{
+        -webkit-transition-duration: 0.4s; 
+        transition-duration: 0.4s;
+        border-radius: 4px;
+        font-size: 20px;
+        width: 100px;
+        margin-left: 10px;
+        background-color: rgba(192,255,62,0.6);
+        color: black;
+    }
+.button:hover {
+        background-color: rgba(255,215,0,0.9); 
+        color: rgba(0,100,0,0.9);
+    }

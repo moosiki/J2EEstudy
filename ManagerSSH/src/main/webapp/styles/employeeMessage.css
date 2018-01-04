@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+.box{
+	height: 30px;
+	width: 150px;
+	margin: 10px 0 10px 0;
+	border-radius: 5px;
+	border-color: #809EED;
+}
+
+#gender{
+	width: 100px;
+}
+
+button{
+	transition-duration: 0.2s;
+	margin-left: 30px;
+	border: 0;
+	border-radius: 4px;
+	width: 60px;
+	height: 25px;
+	background: #1ADC6A;
+	color: #030620;
+}
+.buttonEvent{
+	background: #06112D;
+	color: #CAF5A9;
+}
