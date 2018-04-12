@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8"/>
+<meta name="description" content="轻实训-CRM系统"/>
+<meta name="author" content="Mryang"/>
+<title>CRM System</title>
+<!-- bootstrap 工具博阿  -->
+<link rel="stylesheet" type="text/css" media="screen" href="/plugins/bootstrap/bootstrap.css"/>
+
+<!-- 字体图标css 官网地址http://fontawesome.dashgame.com/ -->
+<link rel="stylesheet" type="text/css" media="screen" href="/plugins/font-awesome/css/font-awesome.min.css"/>
+
+<!-- 基于bootstrap的提示框架 下载地址https://github.com/CodeSeven/toastr -->
+<link rel="stylesheet" type="text/css" media="screen" href="/plugins/bootstrap-toastr/toastr.css"/>
+
+<!-- jquery确认提示框样式文件  官网jquery-confirm -->
+<link rel="stylesheet" type="text/css" media="screen" href="/plugins/jquery-confirm/jquery-confirm.min.css"/>
+
+<!-- jstree 样式文件 -->
+<link rel="stylesheet" type="text/css" media="screen" href="/plugins/jstree/themes/default/style.min.css"/>
+
+<!-- jquery拖动排序插件样式文件 -->
+<link rel="stylesheet" type="text/css" media="screen" href="/plugins/jquery-nestable/jquery.nestable.css"/>
+
+<!-- 自定义css文件 -->
+<link rel="stylesheet" type="text/css" media="screen" href="/css/style.css"/>
+
+</head>
+<body class="index-body fixed-header fixed-ribbon fixed-navigation">
+	<!--首页头部分  -->
+	<header id="header">
+		<!--标题和logo  -->
+		<div id="logo-group">
+			<span id="logo">轻实训-CRM系统</span>
+			
+			<!--导航栏  -->
+			<span title="导航" id="activity" class="activity-dropdown">
+				<i class="fa fa-lightbulb-o"></i>
+			</span>
+			
+			<!--下拉菜单  -->
+			<div class="ajax-dropdown">
+				
+				<!--ID链接是通过Ajax获得的Ajax容器的”Ajax的通知“  -->
+				<div class="btn-group btn-group-justified" data-toggle="buttons">
+					<label class="btn btn-default"> 
+						<input type="radio" name="activity" url="index/navigation/business"/> 商机导航
+					</label> 
+					<label class="btn btn-default"> 
+						<input type="radio" name="activity" url="index/navigation/menu"/> 所有菜单
+					</label>
+				</div>
+				
+				<!-- 通知的内容  -->
+				<div class="ajax-notifications cutom-scroll"></div>
+			</div>
+		</div>
+		
+			<!-- 右侧操作按钮部门 -->
+		<div id="buttons" class="pull-right">
+			<div class="user-info">欢迎您:<span th:text="${user.name}"></span>
+			<span th:text="${session.SPRING_SECURITY_CONTEXT.authentication.principal.username}"></span></div>
+
+			<!-- 退出按钮 -->
+			<div id="logout" class="btn-header transparent pull-right">
+				<span> <a href="/logout" title="退出系统" data-logout-msg="是否确认退出系统？"> <i class="fa fa-sign-out"></i>
+				</a>
+				</span>
+			</div>
+
+			<form action="" class="header-search pull-right">
+				<input type="text" placeholder="快速搜索" id="search-fld"/>
+				<button id="searchButton" class="search-button" type="button">
+					<i class="fa fa-search"></i>
+				</button>
+				<a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i class="fa fa-times"></i></a>
+			</form>
+
+			<!-- 全屏按钮 -->
+			<div id="fullscreen" class="btn-header transparent pull-right">
+				<span> <a href="javascript:void(0);" onclick="launchFullscreen(document.documentElement);" title="Full Screen"> <i class="fa fa-fullscreen"></i>
+				</a>
+				</span>
+			</div>
+		</div>
+	</header>
+
+	<!-- 左侧菜单栏部分 -->
+	<aside id="left-panel">
+		<nav>
+			<ul>
+				<!-- 首页 -->
+				<li class="dashboard">
+					<a href="dashboard/" title="Dashboard"> <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">统计分析</span>
+					</a>
+				</li>
+				
+				<!--菜单模块  -->
+				<li class="sub-menu" th:each="topMenu:${userMenus}">
+					<a href="#">
+						<i th:class="${topMenu.icon }"></i>  
+						<span class="menu-item-parent" th:text="${topMenu.name}"></span>
+						<!-- <span class="menu-item-parent" th:text="${topMenu.children}"></span> -->
+					</a>
+					<ul class="sub">
+						<li th:each="subMenu:${topMenu.children}">
+							<li >
+								<a th:href="${subMenu.url}" th:text="${subMenu.name}"></a>
+							</li>
+						</li>
+						
+					</ul>
+				
+				</li>
+				
+			</ul>
+		</nav>
+		<span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i>
+		</span>
+	</aside>
+
+	<!-- 主界面 -->
+	<div id="main" role="main">
+		<!-- 菜单导航 -->
+		<div id="ribbon">
+			<ol class="breadcrumb">
+			</ol>
+		</div>
+
+		<!-- 主面板 -->
+		<div id="content">
+			
+		</div>
+	</div>
+
+	<!-- jQuery压缩库，版本号query-2.0.2 jquey官网地址https://jquery.com -->
+	<script src="/plugins/jquery-3.2.1.min.js"></script>
+
+	<!-- 时间控件 -->
+	<script src="/plugins/WdatePicker.js"></script>
+
+	<script src="/plugins/jquery-ui-1.10.3.min.js"></script>
+
+	<!-- Ajax form提交 官网地址 http://plugins.jquery.com/form/ -->
+	<script src="/plugins/jquery.form.min.js"></script>
+
+	<!-- Bootstrap是Twitter推出的一个用于前端开发的开源工具包 官网地址http://getbootstrap.com -->
+	<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+	<!-- jquery表格插件 官网地址https://www.datatables.net -->
+	<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+
+	<!-- dataTables表格插件Bootstrap定制脚本  -->
+	<script src="/plugins/datatables/dataTables.bootstrap.js"></script>
+
+	<!-- nice validate数据校验框架 官网地址http://www.niceue.com/validator/ -->
+	<script src="/plugins/nice-validator/jquery.validator.js"></script>
+
+	<!-- nice validate校验框架中文包  官网地址http://www.niceue.com/validator -->
+	<script src="/plugins/nice-validator/local/zh-CN.js"></script>
+
+	<!-- 基于bootstrap的提示框架 下载地址https://github.com/CodeSeven/toastr -->
+	<script src="/plugins/bootstrap-toastr/toastr.js"></script>
+
+	<!-- jquery确认提示框  官网 http://craftpip.github.io/jquery-confirm/-->
+	<script src="/plugins/jquery-confirm/jquery-confirm.min.js"></script>
+
+	<!-- 树形菜单插件 官网地址https://www.jstree.com/ -->
+	<script src="/plugins/jstree/jstree.min.js"></script>
+
+	<!-- jquery拖动排序插件 下载地址 https://github.com/dbushell/Nestable  -->
+	<script src="/plugins/jquery-nestable/jquery.nestable.js"></script>
+
+	<!-- 上传图片本地预览插件 -->
+	<script src="/plugins/uploadPreview.min.js"></script>
+
+	<!-- 图标绘制插件 官网下载地址 http://www.chartjs.org -->
+	<script src="/plugins/chart/Chart.min.js"></script>
+
+	<!-- 基于html5创建web地图插件 官网地址http://www.hcharts.cn/product/highmaps.php -->
+	<script src="/plugins/highmaps/highmaps.js"></script>
+
+	<!-- 导出插件 官网地址 https://www.hcharts.cn -->
+	<script src="/plugins/modules/exporting.js"></script>
+
+	<!-- 中国地图插件 -->
+	<script src="/js/china-data.js"></script>
+
+	<!-- 自定义数据分页插件 -->
+	<script src="/js/paging-table.js"></script>
+
+	<!-- 自定义首页面初始化脚本 -->
+	<script src="/js/app.js"></script>
+
+	<script type="text/javascript">
+        $(function() {
+            $("#buttons").find('.search-button').click(function() {
+                doAllSearch();
+            });
+        });
+
+        // 全局搜索操作
+        function doAllSearch() {
+            var name = $("#search-fld").val();
+            if (name == "") {
+                toastr.warning('请输入搜索内容！');
+                return;
+            }
+            $('#content').load('${ctx}/index/search/' + name, function(e) {
+
+            });
+        }
+    </script>
+	
+</body>
+</html>

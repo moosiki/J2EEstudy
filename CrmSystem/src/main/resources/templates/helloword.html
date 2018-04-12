@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<link rel="stylesheet" type="text/css" href="/styles/addOrEdit.css"/>
+	<div id="employeeAdd">
+		<div id="titleText">
+			添加学生修改信息
+		</div>
+		<form action="#" method="post" id="addForm">
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<th>loginName</th>
+							<th>password</th>
+							<th>name</th>
+							<th>email</th>
+							<th>gender</th>
+							<th>phone</th>
+							<th>roles</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<!-- <th th:text="${user.loginname }"></th> -->
+							<th th:text="${user.password }"></th>
+							<th th:text="${user.name }"></th>
+							<th th:text="${user.email }"></th>
+							<th th:text="${user.gender }"></th>
+							<th th:text="${user.phone }"></th>
+						<!-- 	<th th:text="${user.roles }"></th> -->
+						</tr>
+					</tbody>
+				</table>
+				员工编号：
+				<input class="box" type="number" name="stuNo" id="emp_no"/><br/>
+				姓　　名：
+				<input class="box" type="text" name="name"/><br/>
+				性　　别：
+				<input type="radio" name="gender" value="男"/>&nbsp;&nbsp;男
+				<input type="radio" name="gender" value="女"/>&nbsp;&nbsp;女
+				<br/>
+				专业：
+				<input class="box" type="text" name="major" id="dept_no"/>&nbsp;&nbsp;
+				专业方向：
+				<select class="box" name="professionNo" id="dept_name">
+	
+					<option value="1">java开发</option>
+					<option value="2">大数据方向</option>
+					<option value="3">软件测试</option>
+					<option value="4">前端开发</option>
+					
+				</select><br/>
+				技能分数：
+				<input class="box" type="number" name="skillescore"/><br/>
+				能力分数：
+				<input class="box" type="number" name="abilityscore"/><br/>
+			</div>
+			<div style="margin: 30px 0 10px 50px;">
+				<button type="button" id="saveBtn">保存</button>
+				<button type="reset" id="resetBtn">重置</button>
+				<button type="button" id="cancerBtn">取消</button>
+			</div>
+		</form>	
+	</div>
+	<script type="text/javascript" src="/scripts/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/scripts/addOrEdit.js"></script>
+</html>
